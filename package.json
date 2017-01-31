@@ -9,7 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.2",
     "express": "^4.14.0",
-    "jade": "^1.11.0"
+    "file-stream-rotator": "0.0.7",
+    "jade": "^1.11.0",
+    "mongoose": "^4.6.8",
+    "morgan": "^1.7.0",
+    "node-uuid": "^1.4.7",
+    "path": "^0.12.7",
+    "stylus": "^0.54.5"
   }
 }
