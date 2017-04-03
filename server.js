@@ -60,8 +60,31 @@ app.use(bodyParser.json());
 
 //Database configura tion
 
-mongoose.connect('mongodb://127.0.0.1/grills');
+if (env === "development") {
+   mongoose.connect('mongodb://127.0.0.1/grills',  {
+    server: {
+      socketOptions: {
+        socketTimeoutMS: 1000,
+        connectTimeoutMS: 1000
+      }
+    }
+  });
+} else {
+  mongoose.connect("mongodb://durgavinay:GangaBhavani3@ds149800.mlab.com:49800/grills",  {
+    server: {
+      socketOptions: {
+        socketTimeoutMS: 0,
+        connectTimeoutMS: 0
+      }
+    }
+  });
+}
+
+
+
+mongoose.Promise = require('bluebird');
 var db = mongoose.connection;
+
 db.on('error', console.error.bind(console, 'connection error...'));
 db.once('open', function callback() {
   console.log('grills db opened');
@@ -86,7 +109,7 @@ app.get('/', function(req, res){
   });
 });
 
-var port = 3000;
+var port = process.env.PORT || 3000;
 app.listen(port);
 
 console.log('Server listening to the port: ' + port);
